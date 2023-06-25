@@ -29,6 +29,7 @@ ShinobuApp({
   o,
   lazy,
   html,
+  dynamicHtml, 
   props,
   dynamicProps,
   funcs,
@@ -43,6 +44,9 @@ ShinobuApp({
   html: `
     ..
   `,
+  dynamicHtml: (props, dynamicProps) => {
+    return '..';
+  },
   props: {
     a: 0,
   },
@@ -50,7 +54,7 @@ ShinobuApp({
     return {};
   },
   funcs: {
-    onload: () => console.log('component load success >w<'),
+    onload: () => console.log('app load success >w<'),
   },
 });
 ```
@@ -85,11 +89,25 @@ ShinobuApp({
 ```
 
 ## Html
+
+### html
 Takes in **`app`** html.
 ```js
 ShinobuApp({
   ...
   html: '< app />',
+  ...
+});
+```
+
+### dynamicHtml: () => {};
+Takes in a function that returns **`app`** html.
+```js
+ShinobuApp({
+  ...
+  dynamicHtml: async (props, dynamicProps) => {
+    return '< app />';
+  },
   ...
 });
 ```
@@ -104,6 +122,7 @@ ShinobuApp({
   props: {
     id: 2,
   },
+  ...
 });
 ```
 
@@ -115,6 +134,7 @@ ShinobuApp({
   dynamicProps: async () => {
     return {id: 2};
   },
+  ...
 });
 
 ```
@@ -127,6 +147,7 @@ ShinobuApp({
   html: `
     < onclick=funcs.onclick() />
   `,
+  ...
   funcs: {
     onload: () => console.log('app load success >w<'),
     onclick: () => console.log('clicked >w<'),
